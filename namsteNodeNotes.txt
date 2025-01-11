@@ -1,0 +1,188 @@
+*ip ponits to the server computer making request to the server .
+*NODEJS HAS C++ CODE 
+*V IS A C++ PROGRAM
+*Node REPL Read, Evaluate, Print, Loop
+*Write #node in CMD before writng code
+*inside node js we have v8 engine and other super power
+and code was passed into v8 engine.
+*Global object give us many kind of super power like setTimout, setInterval etc.. Global is node.js things
+
+*** Common JS (CJS) Modules (All node js repositries used this we will also  use this)
+	# module.exports		
+	# require functons ()
+	# by default used Nodejs
+	# older
+	# Synchronous (next line of code will not execute until & unless require function has not loaded)	
+	# non stric mode
+
+*** ES (MJS) Modules
+# import & export
+# by default used in React, Angular
+# Newer way
+# Async option is there 
+# strict mode
+
+* All these folder is module , Module is basically is collection of code which is seprate or private to itself its exist privetly
+
+
+Lecture 05
+## whenever you require this file what happens is node js take the code from this file whatever the code in xyz file and wrps it into the function and execute
+
+
+## Whenever call require All the code if the module is wrapped inside a function (IIFE) Immediately Invoked Function Expression and its keeps variabe and functions safe
+
+Q. How are variabled & functions in different module?
+   IIFE & requires statement is wrapping code inside IIFE
+Q. How do you get access to module.exports coming from?
+	Nodejs
+	Nodejs passes module as a parameter one of the parameter to the IIFE	
+
+
+	There is 5 steps machanisem of requires -:
+	require(./path)
+	1-> Resolving the module
+		-> whether it is coming from  node.util, ./localpath , ./json file
+	2-> Loading the module 
+		-> file context is loaded acc to file type
+	3-> Wraps inside an IIFE
+	4-> Evaluation like executed
+		->module.exports happening
+	5-> cacheing // when we run it will require happend for all file and next time it will not do once again  it will returns only cache // Like every file having require so it will not run again and again 
+
+# JS is a Synchronous single threaded language for exp its executed line by line
+
+# Asynchronous we can also say non-blocking queue Js is sync but with the the node it becomes Async , Async like if we have to wait few sec for some task like fecth API,
+
+# Js engine has just One call stack	 , it also has Memory heap-: it is contains all the number, funcion all variabe , also it has Garbage collector-: which collect unused functions variables 
+
+	* When we pass any code then crate GEC and executed , when function code copleted then its pop out when whole code is execued the GEC also gone away from call stack 
+
+-> Time , Tide & JS waits for none 😂
+
+# When we make Async operation when libuv has help us to perform this 
+
+Sync code , Async Code , Blocking sync code, setTimout(cbfn,0), Non blocking I/O , Main Thread, Asynchronous I/O, Libuv Github
+
+@ When we give our code to v8 ->1 PARSING 
+	->2 Lexical Analysis that means is broken down into token like break variable var a=1, var b=2 and it is also known as tokenization 
+	-> Syntax Analysis i.e. devlop like  Tokens are coverted into AST Abstract Syntax Tree like made into tree format this step is knon as parsing  , We can explore and can see example on  theb website "astexplorer.net" like write soe code it will make that in AST format -: whenever we declare any variable it has two things one is identifier and another is Literal ..
+
+# Syntax error -: When our code cannot be able to generate AST that is called syntax error.
+
+@ There are two types of languages -:
+
+1. Interpretted -; ASA you give code it read line by line , Fast initial executed, Interpretted is there.
+2. Compiled-; ASA code given , the whole High level code compiled into machine code then machine code is executed , Initially heavy but executed fast,Complied is there.
+
+There is Third type as well ja is not both this used both using Interpretted as well ass compiled ,js id Just in Time Compiled.
+
+@ AST has -> Ignition Interpretter which is converted AST code into -> Byte code and -> Execution happening , If Ignition Interpretter find oppertunity to optimise ised to code then it will passed to -> Turbo fan compiler which is happening behind it will convert that code Optimised Machine code
+
+@@ Best place to read this on V8.dev blog site.
+
+LIBUV -: There is three things inside Libuv
+1. Event loop ,2. callback queue ,3. Thread Pool
+
+# Libuv make Asynchronous I/O (Non blocking I/O)
+
+Event Loop -: IT has certain phase -; Timer,-> Poll,-> Check, -> Close -> Timer , Poll ...... It is cycle of Ev Loop. Its keep runnigs Like that 
+
+1. Timer Like :- setTimout, setInterval all the timers and callbacks is executed
+2. Poll phase -: I/O callbacks , 
+			-> incoming Connections
+			-> Data,
+			-> fs, crypto, https.get requests
+3. Check phase-: (set Immediate) is runs ; it is a utility 			
+4. Close Phase-: Socket.on ("close")
+
+*All the callback is waiting in Callback Queues
+
+##Inside this event loop -:
+Before Each face Process.nextTick() -> Promise Callbacks loop -> Process.nextTick()......... happening before every is executed.
+
+// All these code writted in C language
+
+@@Thread Pool
+# Libuv has thread pool it uses this TP to request any file , supoose encrypting the password that times uses like complex task
+
+In node js inside libuv by default size is 4 of UV_THREADPOOL
+
+if i make 5 call then it will wait to empty at least one thread.
+
+When Libuv use Thread pool -:{
+# fs Module-: fs.readFile , Module-: dns.Lookup, for the crypto method -: crypo.pbkhf2, 
+}
+@@ Is node.js Single threaded or MultiThreaded , It depends on task what we are performing-:
+	#If we are passing any Synchronous Code it was Single threaded
+	#IF its need to use Libuv it was Multi threaded UV_THREADPOOL uv has managing threadpool
+
+	Read about-;  epoll {Linux}, kqueue {macos}, {fds-socket descriptors}, {Event Emitters}, {Stream & Buffer}, (Pipes)
+
+DON'T BLOCK THE MAIN Thread
+	- Sync method,
+	- Complex Regex
+	- Heavy JSON objects
+	- Complex calculations / Loops
+
+	# Data structure is important - 
+		even epoll also use Red Black Three Data structure, Min-Heap is kind of making Balance between Timers Like Many setTimout
+
+	- Naming is very important
+		process.nextTick() VS setImmediate()
+		Node.js suggested use setImmediate instead of process.nextTick()
+
+
+DATA BASE -;Databse is an organized of data or a type of data store based on the use of a DBMS.
+# DBMS Data base management system is a software which intracts with user applicational and database itself to capture and analyze the date.
+
+RDBMS(MYSQL)-: - Table , Row, Column
+			   - structured
+			   - Fixed Schemas , Like ID, first name, last name
+			   - SQL
+			   - Tough horizontal Scaling
+			   - Relattionships - foreign keys & joins
+			   - Read Heavy apps transaction workloads
+			   - Like Banking Apps
+
+NoSQL(Mongo DB)-: - Collections, Documents, Feilds,
+				  - Unstuctured	
+				  - Flexible Schemas, Like Add any points in object or we can remove
+				  - Mongo (MSQL), Neo 4J (Cypher)
+				  - Easy to scale horixontally & vertically
+				  - Nested Relationships
+				  - Real time . big dat distributed computing 
+				  - Real Time analysis Like Social Media Apps.
+
+@@ REQUIREMENTS OF PROJECTS
+	->Design -> Devlopment -> Testing -> Deployment -> Maintainance
+
+# Monolith -> Backend, DB connections, Frontend, Auth, Emails, Analytics, It All keeps into Single repositries 
+
+# Microservices -> There can be Microserveuce Only for Frontend or Backend, Auth, Admins, Notified Like this Large Companies make Big projects into Small Small pecies which Manage by different diff Teams.
+
+// If we spend more time on planning so our coding part would be very easy 😎 Mool Mantra  
+
+API-: Thease are knon as HTTP method & CRUD operations
+GET - Take Data from the service / 
+POST-: Sent some data
+PUT-: Update the DATA 
+Patch-: Update the data but diff 
+DLETE-: remove data 
+
+// Dev tinder
+
+Expres js is an open source 
+Package.lock.json is tell you exact version of your project which is running on.
+package.json is telling you which version you should it use.
+
+Create a server.
+HW
+-Create a repo , Initialize the repo 
+-know  about node_module, package.json, package.lock.json
+-Install express,
+-Listen to port 7777
+-Make to request handlers for /test, /hello
+- Install nodemon and update scripts inside package.json
+- What are dependencies
+- Whatis the use of "-g" while npm install
+- Difference between caret and tilde (^ vs ~)
