@@ -4,16 +4,16 @@ const app = express();
 
 // Route to handle GET requests
 app.get("/getUserData", (req, res) => {
-//   try {
+  try {
     // Simulating an error
     
     // This line will not be executed due to the error above
-    // throw new Error("error");
+    throw new Error("error");
     res.send("user data sent");
-//   } catch (err) {
+  } catch (err) {
     // Send an error response with a proper message and status code
-    // res.status(500).send("Something went wrong: " + err.message);
-//   }
+    res.status(500).send("Something went wrong: " + err.message);
+  }
 });
 
 /**
